@@ -1,0 +1,5 @@
+bin
+/UUDownloader/log
+/UUDownloader/etc/UUDownloader.properties
+/UUDownloader/build
+.metadata
