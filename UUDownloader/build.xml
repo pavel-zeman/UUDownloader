@@ -1,4 +1,4 @@
-<project name="UUGoogleSync" default="build">
+<project name="UUDownloader" default="build">
 	
 	<property name="launch4j.dir" location="c:/software/Launch4j" />
 	<property name="build.directory"      value="build"/>
