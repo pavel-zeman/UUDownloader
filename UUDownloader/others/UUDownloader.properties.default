@@ -1,0 +1,9 @@
+# data needed to connect to UU
+uu.accessCode1 = 
+uu.accessCode2 = 
+
+# downloader properties
+destinationFolder = 
+directoryForArtifact = 1
+artifacts = 
+

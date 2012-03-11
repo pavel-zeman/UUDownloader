@@ -1,0 +1,65 @@
+<project name="UUGoogleSync" default="build">
+	
+	<property name="launch4j.dir" location="c:/software/Launch4j" />
+	<property name="build.directory"      value="build"/>
+	<property name="source.directory"     value="src"/>
+	<property name="application.directory"     value="${build.directory}/application"/>
+
+	<taskdef name="launch4j" classname="net.sf.launch4j.ant.Launch4jTask" classpath="${launch4j.dir}/launch4j.jar:${launch4j.dir}/lib/xstream.jar" />
+
+	<!-- default target -->
+	<target name="build" depends="prepare, compile, package"/>
+	
+	<!-- delete current temporary structures, create new ones -->
+	<target name="prepare">
+		<delete dir="${build.directory}" quiet="true"/>
+		<mkdir dir="${build.directory}"/>
+	</target>
+	
+	<!-- compile all classes -->
+	<target name="compile">
+		<mkdir dir="${build.directory}/classes"/>
+	    <javac srcdir="${source.directory}" destdir="${build.directory}/classes" encoding="UTF-8" fork="true" debug="true">
+	    	<classpath>
+	    		<fileset dir="lib">
+	    			<include name="*.jar"/>
+	    		</fileset>
+	    	</classpath>
+		</javac>
+	</target>
+	
+	<!-- create application JAR and a single ZIP archive -->
+	<target name="package">
+		<mkdir dir="${application.directory}"/>
+		<mkdir dir="${application.directory}/config"/>
+		<copy file="others/UUDownloader.properties.default" tofile="${application.directory}/config/UUDownloader.properties"/>
+		
+		<mkdir dir="${application.directory}/lib"/>
+		<copy todir="${application.directory}/lib">
+			<fileset dir="lib"/>
+		</copy>
+		
+		<loadfile srcfile="../.git/refs/heads/master" property="git.revision"/>
+		<tstamp>
+			<format property="build.timestamp" pattern="yyyy-MM-dd HH:mm"/>
+		</tstamp>
+		<jar destfile="${application.directory}/lib/UUDownloader.jar">
+			<fileset dir="${build.directory}/classes"/>
+			<fileset dir="etc" excludes="UUDownloader.properties"/>
+			<manifest>
+				<attribute name="Built-On" value="${build.timestamp}"/>
+				<attribute name="Commit" value="${git.revision}"/>
+			</manifest>
+		</jar>
+		
+		<mkdir dir="${application.directory}/log"/>
+		
+		<launch4j configfile="others/UUDownloader.xml"/>
+
+		<zip destfile="${build.directory}/UUDownloader.zip" basedir="${application.directory}">
+		</zip>
+		
+	</target>
+
+	
+</project>

@@ -1,0 +1,37 @@
+<launch4jConfig>
+  <dontWrapJar>true</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>lib\UUDownloader.jar</jar>
+  <outfile>..\build\application\UUDownloader.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <customProcName>true</customProcName>
+  <stayAlive>false</stayAlive>
+  <manifest></manifest>
+  <icon>icon.ico</icon>
+  <singleInstance>
+    <mutexName>UU_DOWNLOADER_MUTEX</mutexName>
+    <windowTitle></windowTitle>
+  </singleInstance>
+  <classPath>
+    <mainClass>cz.pavel.uudownloader.UUDownloader</mainClass>
+    <cp>lib/commons-logging-1.1.1.jar</cp>
+    <cp>lib/httpclient-4.1.2.jar</cp>
+    <cp>lib/httpcore-4.1.2.jar</cp>
+    <cp>lib/log4j-1.2.16.jar</cp>
+    <cp>config</cp>
+  </classPath>
+  <jre>
+    <path></path>
+    <minVersion>1.6.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <initialHeapSize>16</initialHeapSize>
+    <maxHeapSize>16</maxHeapSize>
+    <opt>-Djava.net.useSystemProxies=true</opt>
+  </jre>
+</launch4jConfig>
